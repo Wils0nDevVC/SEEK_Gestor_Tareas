@@ -1,0 +1,58 @@
+# 🔹 IGNORAR ARCHIVOS DEL BACKEND (Spring Boot)
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Spring Boot
+*.log
+logs/
+*.war
+*.jar
+*.class
+bin/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# STS (Spring Tool Suite)
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# 🔹 IGNORAR ARCHIVOS DEL FRONTEND (Angular)
+node_modules/
+dist/
+.angular/
+.npm/
+.yarn/
+
+# 🔹 IGNORAR CONFIGURACIONES DEL EDITOR
+.vscode/
+.DS_Store
+*.swp
+
+# 🔹 IGNORAR ARCHIVOS DE DOCKER
+docker-compose.override.yml
+*.env
+.env.local
+.env.development
+.env.production

@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  # Servicio para la base de datos MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: wilson1890
+      MYSQL_DATABASE: gestor_tareas
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - my-network
+
+  # Backend con Spring Boot
+  backend:
+    build:
+      context: ./tareas-api/tareas-api
+      dockerfile: Dockerfile
+    container_name: backend-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/gestor_tareas?serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: wilson1890
+      CORS_ALLOWED_ORIGINS: http://localhost:4200
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - my-network
+
+  # Frontend con Angular
+  frontend:
+    build:
+      context:  ./tareas-front
+      dockerfile: Dockerfile
+    container_name: angular-app
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    networks:
+      - my-network
+
+# Volumen para MySQL
+volumes:
+  mysql_data:
+
+# Red compartida entre todos los servicios
+networks:
+  my-network:
+    driver: bridge
