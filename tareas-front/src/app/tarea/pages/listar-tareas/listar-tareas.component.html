@@ -1,0 +1,93 @@
+<h1>Listado de Tareas</h1>
+<br>
+<mat-divider></mat-divider>
+<br>
+<!-- Botón flotante para agregar tareas -->
+<div class="  justify-content-end ">
+  <button mat-mini-fab class="bg-primary "  color="primary" (click)="openDialog()" matTooltip="Agregar Tarea">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<div class="grid bm-12">
+  <div class="col-12 p-3">
+    <!-- Botón para enviar correos -->
+
+    <div class="col-12 p-3">
+      <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource">
+          <!-- User name Definition -->
+          <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef>Accion </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <button
+                (click)="onDeleted(row)"
+                mat-icon-button
+                color="primary"
+                matTooltip="Eliminar"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="onUpdate(row)"
+                matTooltip="Editar"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Age Definition -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{ row.id }} </mat-cell>
+          </ng-container>
+
+          <!-- Title Definition -->
+          <ng-container matColumnDef="titulo">
+            <mat-header-cell *matHeaderCellDef> Titulo </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{ row.titulo }} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="descripcion">
+            <mat-header-cell *matHeaderCellDef> Descripción  </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{ row.descripcion }} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="estado">
+            <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{ row.estado }} </mat-cell>
+          </ng-container>
+         
+          <!-- Header and Row Declarations -->
+          <mat-header-row
+            *matHeaderRowDef="[
+               'action',
+                'id',
+                'titulo',
+                'descripcion',
+                'estado',
+            ]"
+          ></mat-header-row>
+          <mat-row
+            *matRowDef="
+              let row;
+              columns: [
+              'action',
+              'id',
+              'titulo',
+              'descripcion',
+              'estado',
+              ]
+            "
+          ></mat-row>
+        </mat-table>
+        <mat-paginator
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page of users"
+      ></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
